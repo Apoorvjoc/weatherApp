@@ -1,7 +1,6 @@
 // api key:08178f17ad3eb024beba5a661241bf1c
 // e9166e1c3c427b26d15e8e6704947ccf
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-require('dotenv').config()
 
 const submitBtn = document.getElementById('submitBtn');
 const cityName = document.getElementById('cityName');
@@ -30,9 +29,11 @@ const dataHide = document.querySelector(".middle_layer");
 const getInfo = async(e)=>{
     e.preventDefault();
     let cityVal = cityName.value;
+    // alert(cityVal);
 
     if(cityVal === "")
     {
+        // alert("you entered inside if")
         Msg.style.color = 'red';
         Msg.innerText = "please ,write valid city name !!!!";
         // alert('Write valid city name');
@@ -40,10 +41,15 @@ const getInfo = async(e)=>{
     }
     else{
         try{
-            let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&appid=${KEY}`;
+            // alert('city name ' , cityVal)
+            // alert("you entered inside try")
+
+            // let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&appid=08178f17ad3eb024beba5a661241bf1c`;
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&appid=e9166e1c3c427b26d15e8e6704947ccf`;
+            
             const response = await fetch(url);
-
-
+            // console.log(response);
+            // alert('city name 2 ' , cityVal)
 
             /**Handling form Values */
 
@@ -51,6 +57,7 @@ const getInfo = async(e)=>{
             // converting json data to object
             const data = await response.json();
             const arrData = [data];
+            console.log(arrData);
 
             // setting up values in form fields
             Msg.style.color = 'rgb(108, 181, 199)';
@@ -84,6 +91,7 @@ const getInfo = async(e)=>{
             /*** End of handlig Form VAlue*/
 
         }catch{
+            // alert("inside catch")
             Msg.style.color = 'red';
             Msg.innerText = "please ,write valid city name !!!!";
             dataHide.classList.add('data_hide');
